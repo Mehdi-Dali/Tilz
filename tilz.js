@@ -17,7 +17,7 @@ window.Tilz = function(container,item,gutter,animationDuration) {
 
 Tilz.prototype = {
 
-	//return a clone of "array"
+	// return a clone of "array"
 	
 	cloneArray: function(array) {
 	   var newObj = [];
@@ -27,7 +27,7 @@ Tilz.prototype = {
 	   return newObj;
 	},
 	
-	//cleanEmptyIntervals (pageArray) delete all intervals of length 0
+	// cleanEmptyIntervals (pageArray) delete all intervals of length 0
 	
 	cleanEmptyIntervals: function(array) {
 		for (var i=0; i<array.length; i++) {
@@ -39,7 +39,7 @@ Tilz.prototype = {
 		}
 	},
 	
-	//fuseIntervals(pageArray) fuse adjacent intervals with same "y" value
+	// fuseIntervals(pageArray) fuse adjacent intervals with same "y" value
 	
 	fuseIntervals: function(array) {
 		for (var i=0; i<array.length; i++) {
@@ -52,7 +52,7 @@ Tilz.prototype = {
 		}
 	},
 	
-	//addInterval(pageArray,interval) add tinterval to main array
+	// addInterval(pageArray,interval) add tinterval to main array
 	
 	addInterval: function(array,interval) {
 		for (var i=0; i<array.length; i++) {
@@ -77,7 +77,7 @@ Tilz.prototype = {
 		}
 	},
 	
-	//getYValues(pageArray) get y values by index of intervals and then sort them by y value and return the resulting array
+	// getYValues(pageArray) get y values by index of intervals and then sort them by y value and return the resulting array
 	
 	getYValues: function(array) {
 		var yValues = [];
@@ -90,7 +90,8 @@ Tilz.prototype = {
 		return yValues;
 	},
 	
-	//placeItem(sizeX,sizeY) return found position of sizeX width and sizeY height as an array representing the space occupied vertically
+	// placeItem(sizeX,sizeY) return found position of sizeX width and sizeY height as an array
+	// representing the space occupied vertically
 	
 	placeItem: function(sizeX,sizeY,array) {
 		var tempArray = array;

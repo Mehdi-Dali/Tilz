@@ -19,4 +19,4 @@ To use Tilz, all you need is to wrap your elements inside a container element, t
 var myTiles = new Tilz("container","item",gutter,animationTime);
 myTiles.start();
 ```
-Where *gutter* (**positive integer**) is the spacing between tiles in **pixels**, and *animationTime* (**positive integer**) is the time taken for animating tiles in **milliseconds** when the layout is refreshed *(resizing the container or manually calling the organize() method)*.
+Where *gutter* (**positive integer**) is the spacing between tiles in **pixels**, and *animationTime* (**positive integer**) is the time taken for animating tiles in **milliseconds** when the layout is refreshed *(resizing the window/container or manually calling the organize() method)*.

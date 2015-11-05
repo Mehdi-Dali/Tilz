@@ -11,6 +11,7 @@ To use Tilz, all you need is to wrap your elements inside a container element, t
   <div class="item"></div>
   ...
 </div>
+<script src="./path/to/tilz.js"></script>
 ```
 ###### Javascript
 ![alt tag](https://cloud.githubusercontent.com/assets/15676122/10978604/bfafd894-83ef-11e5-8880-9b3de56be4aa.png)

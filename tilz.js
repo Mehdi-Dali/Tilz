@@ -1,9 +1,9 @@
 /*
  * Tilz V1.0.0
  * Tiled layout tool
- * http://github.com/Mehdi-Dali/Tilz
+ * http://mehdi-dali.github.io/Tilz/
  * MIT License
- * by Mehdi Daldali
+ * by Mehdi Dali.
  */
 
 (function (window, document) {

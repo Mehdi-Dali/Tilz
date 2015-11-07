@@ -1,9 +1,9 @@
 /*
  * Tilz V1.0.0
  * Tiled layout tool
- * http://github.com/Mehdi-Dali/Tilz
+ * http://mehdi-dali.github.io/Tilz/
  * MIT License
- * by Mehdi Daldali
+ * by Mehdi Dali.
  */
 
 (function (window, document) {
@@ -94,17 +94,21 @@ Tilz.prototype = {
 	// representing the space occupied vertically
 	
 	placeItem: function(sizeX,sizeY,array) {
-		var tempArray = array;
-		var yValues = Tilz.prototype.getYValues(tempArray);
-		var minYValue = yValues[0][1];
+		var tempArray, yValues, minYValue;
+		
+		tempArray = array;
+		yValues = Tilz.prototype.getYValues(tempArray);
+		minYValue = yValues[0][1];
 		
 		for (var i=0; i<yValues.length; i++) {
 			if (minYValue == yValues[i][1] && tempArray[yValues[i][0]][0] + sizeX <= tempArray[yValues[i][0]][1]) {
 				//place item
-				var startX = tempArray[yValues[i][0]][0];
-				var endX = startX + sizeX;
-				var oldY = tempArray[yValues[i][0]][2];
-				var newY = oldY + sizeY;
+				var startX, endX, oldY, newY;
+				
+				startX = tempArray[yValues[i][0]][0];
+				endX = startX + sizeX;
+				oldY = tempArray[yValues[i][0]][2];
+				newY = oldY + sizeY;
 				
 				//return position item at (startX,oldY)
 				return [startX,endX,newY];
@@ -130,20 +134,22 @@ Tilz.prototype = {
 		
 		if (instance === undefined) instance = this;
 		
-		var itemS = document.getElementsByClassName(instance.item),
-			containerS = document.getElementsByClassName(instance.container),
-			gutter = instance.gutter;
-			mainContainerHeight = 0,
-			mainContainerWidth = 0;
+		var itemS, containerS, gutter, mainContainerHeight, mainContainerWidth, containerWidth, pageArray;
+		
+		itemS = document.getElementsByClassName(instance.item);
+		containerS = document.getElementsByClassName(instance.container);
+		gutter = instance.gutter;
+		mainContainerHeight = 0;
+		mainContainerWidth = 0;
 		
 		containerS[0].style.width = "initial";
 		containerS[0].style.height = "initial";
 		
-		var containerWidth = itemS[0].parentNode.parentNode.clientWidth;
-		
-		var pageArray = [[0,containerWidth,0]];
+		containerWidth = itemS[0].parentNode.parentNode.clientWidth;
+		pageArray = [[0,containerWidth,0]];
 		
 		Array.prototype.forEach.call(itemS, function(el, i){
+			var height, interval, X, Y;
 			
 			el.style.transition = "transform "+instance.animationDuration+"ms";
 			el.style.position = "absolute";
@@ -151,12 +157,12 @@ Tilz.prototype = {
 			el.style.left = el.offsetLeft+"px";
 			el.style.top = el.offsetTop+"px";
 			
-			var height = el.clientHeight + gutter;
-			var interval = Tilz.prototype.placeItem(el.clientWidth+gutter,height,pageArray);
+			height = el.clientHeight + gutter;
+			interval = Tilz.prototype.placeItem(el.clientWidth+gutter,height,pageArray);
 			Tilz.prototype.addInterval(pageArray,interval);
 			
-			var X = ((gutter/2)+interval[0]-parseInt(el.style.left.replace('px',''))) ,
-				Y = ((gutter/2)+interval[2]-height-parseInt(el.style.top.replace('px','')));
+			X = ((gutter/2)+interval[0]-parseInt(el.style.left.replace('px','')));
+			Y = ((gutter/2)+interval[2]-height-parseInt(el.style.top.replace('px','')));
 			
 			el.style.transform = "translateX("+X+"px) translateY("+Y+"px)";
 			setTimeout(function(){

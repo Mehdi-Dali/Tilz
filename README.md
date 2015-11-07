@@ -1,5 +1,6 @@
 # Tilz
-Tilz is a **simple**, **lightweight**, **javascript** tool for creating tiled layouts. In other words, a way to fix vertical spacing when using CSS's property float.
+Tilz is a **simple**, **lightweight**, **javascript** tool for creating tiled layouts. In other words, a way to fix vertical spacing when using CSS's property float.  
+Demo Website @ http://mehdi-dali.github.io/Tilz/
 ### Getting started
 To use Tilz, all you need is to wrap your elements inside a container element, then declare a new object as shown in this example:
 ###### HTML

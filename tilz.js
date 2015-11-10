@@ -157,8 +157,8 @@ Tilz.prototype = {
 			el.style.left = el.offsetLeft+"px";
 			el.style.top = el.offsetTop+"px";
 			
-			height = Math.ceil(parseFloat(window.getComputedStyle(el,null).getPropertyValue("height").replace('px','')) + gutter);
-			width = Math.ceil(parseFloat(window.getComputedStyle(el,null).getPropertyValue("width").replace('px','')) + gutter);
+			height = parseFloat(window.getComputedStyle(el,null).getPropertyValue("height").replace('px','')) + gutter;
+			width = parseFloat(window.getComputedStyle(el,null).getPropertyValue("width").replace('px','')) + gutter;
 			interval = Tilz.prototype.placeItem(width,height,pageArray);
 			Tilz.prototype.addInterval(pageArray,interval);
 			

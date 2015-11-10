@@ -149,7 +149,7 @@ Tilz.prototype = {
 		pageArray = [[0,containerWidth,0]];
 		
 		Array.prototype.forEach.call(itemS, function(el, i){
-			var height, interval, X, Y;
+			var height, width, interval, X, Y;
 			
 			el.style.transition = "transform "+instance.animationDuration+"ms";
 			el.style.position = "absolute";
@@ -157,8 +157,9 @@ Tilz.prototype = {
 			el.style.left = el.offsetLeft+"px";
 			el.style.top = el.offsetTop+"px";
 			
-			height = el.clientHeight + gutter;
-			interval = Tilz.prototype.placeItem(el.clientWidth+gutter,height,pageArray);
+			height = Math.ceil(parseFloat(window.getComputedStyle(el,null).getPropertyValue("height").replace('px','')) + gutter);
+			width = Math.ceil(parseFloat(window.getComputedStyle(el,null).getPropertyValue("width").replace('px','')) + gutter);
+			interval = Tilz.prototype.placeItem(width,height,pageArray);
 			Tilz.prototype.addInterval(pageArray,interval);
 			
 			X = ((gutter/2)+interval[0]-parseInt(el.style.left.replace('px','')));

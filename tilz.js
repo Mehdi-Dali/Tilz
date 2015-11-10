@@ -159,6 +159,9 @@ Tilz.prototype = {
 			
 			height = parseFloat(window.getComputedStyle(el,null).getPropertyValue("height").replace('px','')) + gutter;
 			width = parseFloat(window.getComputedStyle(el,null).getPropertyValue("width").replace('px','')) + gutter;
+			
+			width = Math.ceil(width * 10) / 10;//fix for floatingpoint dimensions (percent values)
+			
 			interval = Tilz.prototype.placeItem(width,height,pageArray);
 			Tilz.prototype.addInterval(pageArray,interval);
 			

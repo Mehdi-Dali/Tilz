@@ -169,11 +169,15 @@ Tilz.prototype = {
 			Y = ((gutter/2)+interval[2]-height-parseInt(el.style.top.replace('px','')));
 			
 			el.style.transform = "translateX("+X+"px) translateY("+Y+"px)";
+			
+			var newLeft = Math.round((gutter/2)+interval[0]-0.1);//fix for floatingpoint dimensions (percent values)
+			var newTop = Math.round((gutter/2)+interval[2]-height-0.1);//fix for floatingpoint dimensions (percent values)
+			
 			setTimeout(function(){
 				el.style.transition = "";
 				el.style.transform = "";
-				el.style.left = (gutter/2)+interval[0]+"px";
-				el.style.top = (gutter/2)+interval[2]-height+"px";
+				el.style.left = newLeft+"px";
+				el.style.top = newTop+"px";
 			},instance.animationDuration);
 			
 			if(mainContainerHeight < (gutter/2)+interval[2]) mainContainerHeight = (gutter/2)+interval[2];

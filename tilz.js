@@ -134,58 +134,62 @@
 			
 			if (instance === undefined) { instance = this; }
 			
-			var itemS, containerS, gutter, mainContainerHeight, mainContainerWidth, containerWidth, pageArray;
+			var i, itemS, containerS, gutter, mainContainerHeight, mainContainerWidth, containerWidth, pageArray;
 			
-			itemS = document.getElementsByClassName(instance.item);
 			containerS = document.getElementsByClassName(instance.container);
-			gutter = instance.gutter;
-			mainContainerHeight = 0;
-			mainContainerWidth = 0;
 			
-			containerS[0].style.width = "initial";
-			containerS[0].style.height = "initial";
-			
-			containerWidth = itemS[0].parentNode.parentNode.clientWidth;
-			pageArray = [[0,containerWidth,0]];
-			
-			Array.prototype.forEach.call(itemS, function (el) {
-				var height, width, interval, X, Y, newLeft, newTop;
+			Array.prototype.forEach.call(containerS, function (cnt) {
+				itemS = cnt.getElementsByClassName(instance.item);
+				gutter = instance.gutter;
+				mainContainerHeight = 0;
+				mainContainerWidth = 0;
 				
-				el.style.transition = "transform "+instance.animationDuration+"ms";
-				el.style.position = "absolute";
+				cnt.style.width = "initial";
+				cnt.style.height = "initial";
 				
-				el.style.left = el.offsetLeft+"px";
-				el.style.top = el.offsetTop+"px";
+				containerWidth = itemS[0].parentNode.parentNode.clientWidth;
+				pageArray = [[0,containerWidth,0]];
 				
-				height = parseFloat(window.getComputedStyle(el,null).getPropertyValue("height").replace('px','')) + gutter;
-				width = parseFloat(window.getComputedStyle(el,null).getPropertyValue("width").replace('px','')) + gutter;
-				
-				width = Math.ceil(width * 10) / 10;//fix for floatingpoint dimensions (percent values)
-				
-				interval = window.Tilz.prototype.placeItem(width, height, pageArray);
-				window.Tilz.prototype.addInterval(pageArray, interval);
-				
-				X = ((gutter/2)+interval[0]-parseInt(el.style.left.replace('px',''), 10));
-				Y = ((gutter/2)+interval[2]-height-parseInt(el.style.top.replace('px',''), 10));
-				
-				el.style.transform = "translateX("+X+"px) translateY("+Y+"px)";
-				
-				newLeft = Math.round((gutter/2)+interval[0]-0.1);//fix for floatingpoint dimensions (percent values)
-				newTop = Math.round((gutter/2)+interval[2]-height-0.1);//fix for floatingpoint dimensions (percent values)
-				
-				window.setTimeout(function () {
-					el.style.transition = "";
-					el.style.transform = "";
-					el.style.left = newLeft+"px";
-					el.style.top = newTop+"px";
-				},instance.animationDuration);
-				
-				if(mainContainerHeight < (gutter/2)+interval[2]) { mainContainerHeight = (gutter/2)+interval[2]; }
-				if(mainContainerWidth < (gutter/2)+interval[1]) { mainContainerWidth = (gutter/2)+interval[1]; }
-			});
+				Array.prototype.forEach.call(itemS, function (el) {
+					var height, width, interval, X, Y, newLeft, newTop;
+					
+					el.style.transition = "transform " + instance.animationDuration + "ms";
+					el.style.position = "absolute";
+					
+					el.style.left = el.offsetLeft + "px";
+					el.style.top = el.offsetTop + "px";
+					
+					height = parseFloat(window.getComputedStyle(el,null).getPropertyValue("height").replace('px','')) + gutter;
+					width = parseFloat(window.getComputedStyle(el,null).getPropertyValue("width").replace('px','')) + gutter;
+					
+					width = Math.ceil(width * 10) / 10;//fix for floatingpoint dimensions (percent values)
+					
+					interval = window.Tilz.prototype.placeItem(width, height, pageArray);
+					window.Tilz.prototype.addInterval(pageArray, interval);
+					
+					X = ((gutter/2) + interval[0] - parseInt(el.style.left.replace('px',''), 10));
+					Y = ((gutter/2) + interval[2] - height-parseInt(el.style.top.replace('px',''), 10));
+					
+					el.style.transform = "translateX(" + X + "px) translateY(" + Y + "px)";
+					
+					//fix for floatingpoint dimensions (percent values)
+					newLeft = Math.round((gutter / 2) + interval[0] - 0.1);
+					newTop = Math.round((gutter / 2) + interval[2] - height - 0.1);
+					
+					window.setTimeout(function () {
+						el.style.transition = "";
+						el.style.transform = "";
+						el.style.left = newLeft + "px";
+						el.style.top = newTop + "px";
+					}, instance.animationDuration);
+					
+					if(mainContainerHeight < (gutter / 2) + interval[2]) { mainContainerHeight = (gutter / 2) + interval[2]; }
+					if(mainContainerWidth < (gutter / 2) + interval[1]) { mainContainerWidth = (gutter / 2) + interval[1]; }
+				});
 
-			containerS[0].style.width = mainContainerWidth+"px";
-			containerS[0].style.height = mainContainerHeight+"px";
+				cnt.style.width = mainContainerWidth + "px";
+				cnt.style.height = mainContainerHeight + "px";
+			});
 		},
 		
 		// Initialisation: organizing tiles and refreshing when window is resized
@@ -195,9 +199,9 @@
 			var instance = this;
 			window.Tilz.prototype.organize(instance);
 			
-			window.addEventListener("resize",function () {
+			window.addEventListener("resize", function () {
 					window.Tilz.prototype.organize(instance);
-			},false);
+			}, false);
 		}
 
 	};

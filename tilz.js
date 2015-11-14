@@ -134,7 +134,7 @@
 			
 			if (instance === undefined) { instance = this; }
 			
-			var i, itemS, containerS, gutter, mainContainerHeight, mainContainerWidth, containerWidth, pageArray;
+			var itemS, containerS, gutter, mainContainerHeight, mainContainerWidth, containerWidth, pageArray;
 			
 			containerS = document.getElementsByClassName(instance.container);
 			

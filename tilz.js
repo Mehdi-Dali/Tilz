@@ -20,7 +20,7 @@
 		// return a clone of "array"
 		cloneArray: function (array) {
 			var i, newArr = [];
-			for (i = 0; i < array.length; i = i + 1) {
+			for (i = 0; i < array.length; i++) {
 				newArr[i] = array[i].slice(0);
 			}
 			return newArr;
@@ -30,11 +30,11 @@
 		
 		cleanEmptyIntervals: function (array) {
 			var i;
-			for (i = 0; i < array.length; i = i + 1) {
+			for (i = 0; i < array.length; i++) {
 				if (array[i][0] === array[i][1]) {
 					//delete interval
 					array.splice(i, 1);
-					i = i - 1;
+					i--;
 				}
 			}
 		},
@@ -43,12 +43,12 @@
 		
 		fuseIntervals: function (array) {
 			var i, fa;
-			for (i = 0; i < array.length; i = i + 1) {
+			for (i = 0; i < array.length; i++) {
 				if (array[i + 1] && array[i][2] === array[i + 1][2]) {
 					//fuse intervals
 					fa = [array[i][0], array[i + 1][1], array[i][2]];
 					array.splice(i, 2, fa);
-					i = i - 1;
+					i--;
 				}
 			}
 		},
@@ -57,10 +57,10 @@
 		
 		addInterval: function (array, interval) {
 			var i, j, fa, ma, ea;
-			for (i = 0; i < array.length; i = i + 1) {
+			for (i = 0; i < array.length; i++) {
 				if (interval[0] >= array[i][0] && interval[0] <= array[i][1]) {
 					
-					for (j = i; j < array.length; j = j + 1) {
+					for (j = i; j < array.length; j++) {
 						if (array[j] && interval[1] >= array[j][0] && interval[1] <= array[j][1]) {
 							//add new intervals
 							fa = [array[i][0], interval[0], array[i][2]];
@@ -83,7 +83,7 @@
 		
 		getYValues: function (array) {
 			var i, yValues = [];
-			for (i = 0; i < array.length; i = i + 1) {
+			for (i = 0; i < array.length; i++) {
 				yValues.push([i, array[i][2]]);
 			}
 			yValues.sort(function (a, b) {
@@ -102,7 +102,7 @@
 			yValues = window.Tilz.prototype.getYValues(tempArray);
 			minYValue = yValues[0][1];
 			
-			for (i = 0; i < yValues.length; i = i + 1) {
+			for (i = 0; i < yValues.length; i++) {
 				if (minYValue === yValues[i][1] && tempArray[yValues[i][0]][0] + sizeX <= tempArray[yValues[i][0]][1]) {
 					//place item
 					startX = tempArray[yValues[i][0]][0];
@@ -118,7 +118,7 @@
 						//update y in all previous intervals
 						newTempArray = window.Tilz.prototype.cloneArray(tempArray);
 						
-						for (j = 0; j < i; j = j + 1) {
+						for (j = 0; j < i; j++) {
 							newTempArray[yValues[j][0]][2] = yValues[i][1];
 						}
 						window.Tilz.prototype.fuseIntervals(newTempArray);

@@ -1,5 +1,5 @@
 /*
- * Tilz V1.0.0
+ * Tilz V1.0.1
  * Tiled layout tool
  * http://mehdi-dali.github.io/Tilz/
  * MIT License

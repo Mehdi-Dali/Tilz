@@ -21,3 +21,25 @@ var myTiles = new Tilz("container","item",gutter,time);
 myTiles.start();
 ```
 Where *gutter* (**positive integer**) is the spacing between tiles in **pixels**, and *time* (**positive integer**) is the duration of the tiles animation in **milliseconds** when the layout is refreshed *(resizing the window/container or manually calling the organize() method)*.
+
+### Tips & tricks
+###### Items with sizes in percent (%)
+The best way to implement Tilz in this case is to use gutter-less layout and items as wrappers for content elements.
+```html
+<div class="container">
+  <div class="item">
+    <div class="content"></div>
+  </div>
+  <div class="item">
+    <div class="content"></div>
+  </div>
+  <div class="item">
+    <div class="content"></div>
+  </div>
+  ...
+</div>
+```
+```javascript
+var myTiles = new Tilz("container","item",0,time);
+myTiles.start();
+```

@@ -162,7 +162,7 @@
 					height = parseFloat(window.getComputedStyle(el, null).getPropertyValue("height").replace('px', '')) + gutter;
 					width = parseFloat(window.getComputedStyle(el, null).getPropertyValue("width").replace('px', '')) + gutter;
 
-					width = Math.ceil(width * 10) / 10;//fix for floatingpoint dimensions (percent values)
+					width = Math.round(width * 10) / 10;//fix for floatingpoint dimensions (percent values)
 
 					interval = window.Tilz.prototype.placeItem(width, height, pageArray);
 					window.Tilz.prototype.addInterval(pageArray, interval);
@@ -172,9 +172,9 @@
 
 					el.style.transform = "translateX(" + X + "px) translateY(" + Y + "px)";
 
-					//fix for floatingpoint dimensions (percent values)
-					newLeft = Math.round((gutter / 2) + interval[0] - 0.1);
-					newTop = Math.round((gutter / 2) + interval[2] - height - 0.1);
+					//new positions
+					newLeft = (gutter / 2) + interval[0];
+					newTop = (gutter / 2) + interval[2] - height;
 
 					window.setTimeout(function () {
 						el.style.transition = "";

@@ -162,7 +162,7 @@
 					height = parseFloat(window.getComputedStyle(el, null).getPropertyValue("height").replace('px', '')) + gutter;
 					width = parseFloat(window.getComputedStyle(el, null).getPropertyValue("width").replace('px', '')) + gutter;
 
-					width = Math.round(width * 10) / 10;//fix for floatingpoint dimensions (percent values)
+					width = Math.round((width * 10) - 1) / 10;//fix for floatingpoint dimensions (percent values)
 
 					interval = window.Tilz.prototype.placeItem(width, height, pageArray);
 					window.Tilz.prototype.addInterval(pageArray, interval);

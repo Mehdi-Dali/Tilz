@@ -1,5 +1,5 @@
 /*
- * Tilz V1.0.1
+ * Tilz V1.0.2
  * Tiled layout tool
  * http://mehdi-dali.github.io/Tilz/
  * MIT License
@@ -130,17 +130,17 @@
 
 		// Main function
 
-		organize: function (instance) {
+		organize: function (currentObj, animDur) {
 
-			if (instance === undefined) { instance = this; }
+			if (currentObj === undefined) { currentObj = this; }
 
 			var itemS, containerS, gutter, mainContainerHeight, mainContainerWidth, containerWidth, pageArray;
 
-			containerS = document.getElementsByClassName(instance.container);
+			containerS = document.getElementsByClassName(currentObj.container);
 
 			Array.prototype.forEach.call(containerS, function (cnt) {
-				itemS = cnt.getElementsByClassName(instance.item);
-				gutter = instance.gutter;
+				itemS = cnt.getElementsByClassName(currentObj.item);
+				gutter = currentObj.gutter;
 				mainContainerHeight = 0;
 				mainContainerWidth = 0;
 
@@ -153,11 +153,8 @@
 				Array.prototype.forEach.call(itemS, function (el) {
 					var height, width, interval, X, Y, newLeft, newTop;
 
-					el.style.transition = "transform " + instance.animationDuration + "ms";
+					el.style.transition = "transform " + animDur + "ms";
 					el.style.position = "absolute";
-
-					el.style.left = el.offsetLeft + "px";
-					el.style.top = el.offsetTop + "px";
 
 					height = parseFloat(window.getComputedStyle(el, null).getPropertyValue("height").replace('px', '')) + gutter;
 					width = parseFloat(window.getComputedStyle(el, null).getPropertyValue("width").replace('px', '')) + gutter;
@@ -171,8 +168,7 @@
 					Y = ((gutter / 2) + interval[2] - height - parseInt(el.style.top.replace('px', ''), 10));
 
 					el.style.transform = "translateX(" + X + "px) translateY(" + Y + "px)";
-
-					//new positions
+					
 					newLeft = (gutter / 2) + interval[0];
 					newTop = (gutter / 2) + interval[2] - height;
 
@@ -181,7 +177,7 @@
 						el.style.transform = "";
 						el.style.left = newLeft + "px";
 						el.style.top = newTop + "px";
-					}, instance.animationDuration);
+					}, animDur);
 
 					if (mainContainerHeight < (gutter / 2) + interval[2]) { mainContainerHeight = (gutter / 2) + interval[2]; }
 					if (mainContainerWidth < (gutter / 2) + interval[1]) { mainContainerWidth = (gutter / 2) + interval[1]; }
@@ -196,11 +192,15 @@
 
 		start: function () {
 
-			var instance = this;
-			window.Tilz.prototype.organize(instance);
+			var currentObj = this, oldWidth = window.innerWidth;
+			
+			window.Tilz.prototype.organize(currentObj, 0);
 
 			window.addEventListener("resize", function () {
-				window.Tilz.prototype.organize(instance);
+				if (window.innerWidth !== oldWidth){
+					oldWidth = window.innerWidth;
+					window.Tilz.prototype.organize(currentObj, currentObj.animationDuration);
+				}
 			}, false);
 		}
 

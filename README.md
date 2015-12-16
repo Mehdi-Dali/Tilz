@@ -20,7 +20,7 @@ To use Tilz, all you need is to wrap your elements inside a container element, t
 var myTiles = new Tilz("container","item",gutter,time);
 myTiles.start();
 ```
-Where *gutter* (**positive integer**) is the spacing between tiles in **pixels**, and *time* (**positive integer**) is the duration of the tiles animation in **milliseconds** when the layout is refreshed *(resizing the window/container or manually calling the organize() method)*.
+Where **gutter** (*positive integer*) is the spacing between tiles in ***pixels***, and **time** (*positive integer*) is the duration of the tiles animation in ***milliseconds*** when the layout is refreshed *(resizing the window or manually calling the organize() method)*.
 
 ### Tips & tricks
 ###### Items with sizes in percent (%)
